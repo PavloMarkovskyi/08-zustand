@@ -4,11 +4,7 @@ import { fetchNotes } from "@/lib/api";
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
 }
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug?: string[] }>;
-}) {
+export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const tag = slug?.[0] ?? "All";
   const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
@@ -18,7 +14,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${capitalizedTag} – Notes | NoteHub`,
       description: `Notes list with tag "${capitalizedTag}" in NoteHub.`,
-      url: `https://08-zustand-git-main-pavlomarkovskyis-projects.vercel.app//notes/filter/${tag}`,
+      url: `https://08-zustand-git-main-pavlomarkovskyis-projects.vercel.app/notes/filter/${tag}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
