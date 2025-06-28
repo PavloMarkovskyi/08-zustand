@@ -12,8 +12,10 @@ import css from "./NotesPage.module.css";
 import { useDebounce } from "use-debounce";
 import Link from "next/link";
 
-const PER_PAGE = Number(process.env.NEXT_PUBLIC_NOTES_PER_PAGE) || 12;
-
+const PER_PAGE = Number(process.env.NEXT_PUBLIC_NOTES_PER_PAGE);
+if (!PER_PAGE || Number.isNaN(PER_PAGE)) {
+  throw new Error("Invalid NEXT_PUBLIC_NOTES_PER_PAGE, defaulting to 12");
+}
 interface NotesClientProps {
   initialData: FetchNotesResponse;
   tag: string;
@@ -65,7 +67,12 @@ const NotesClient = ({ tag, initialData }: NotesClientProps) => {
       </header>
 
       {isLoading && <p>Loading notes...</p>}
-      {isError && <p>Error: {(error as Error).message}</p>}
+      {isError && (
+        <div className={css.errorBox}>
+          <p>Something went wrong. Please try again.</p>
+          <pre>{(error as Error).message}</pre>
+        </div>
+      )}
 
       {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
       {data && data.notes.length === 0 && (
