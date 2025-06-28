@@ -1,10 +1,13 @@
+import { Metadata } from "next";
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
 
 interface PageProps {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ slug: string[] }>;
 }
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug?.[0] ?? "All";
   const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);

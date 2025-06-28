@@ -1,11 +1,12 @@
 import NoteForm from "@/components/NoteForm/NoteForm";
 import css from "./CreateNote.module.css";
-export const metadata = {
+import { Metadata } from "next";
+export const metadata: Metadata = {
   title: "Create a new note | NoteHub",
-  describtion: "Create and save your note in NoteHub",
+  description: "Create and save your note in NoteHub",
   openGraph: {
     title: "Create a new note | NoteHub App",
-    describtion: "Create and save your note in NoteHub",
+    description: "Create and save your note in NoteHub",
     url: "https://08-zustand-git-main-pavlomarkovskyis-projects.vercel.app/notes/create",
     images: [
       {
