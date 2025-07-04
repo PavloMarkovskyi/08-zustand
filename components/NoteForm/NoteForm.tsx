@@ -22,6 +22,18 @@ const NoteForm = () => {
   });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!draft.title.trim()) {
+      alert("Title is required");
+      return;
+    }
+    if (draft.title.trim().length < 3) {
+      alert("Title must be at least 3 characters");
+      return;
+    }
+    if (draft.content.length < 10) {
+      alert("Content must be at least 10 characters");
+      return;
+    }
     mutate(draft);
   };
   return (
